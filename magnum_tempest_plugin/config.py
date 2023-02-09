@@ -26,6 +26,13 @@ ServiceAvailableGroup = [
 magnum_group = cfg.OptGroup(name="magnum", title="Magnum Options")
 
 MagnumGroup = [
+    cfg.DictOpt("labels",
+                default={},
+                help="Labels to pass to the created clusters"),
+    cfg.StrOpt("insecure_registry",
+               help="Indicates using insecure registry when deploying a "
+                    "cluster, it should be a valid url with port (e.g. "
+                    "192.168.100.5:5000)"),
     cfg.StrOpt("docker_storage_driver",
                help="Docker storage driver. Supported: devicemapper, overlay"),
     cfg.StrOpt("image_id",

@@ -115,12 +115,13 @@ def cluster_template_data(**kwargs):
         "tls_disabled": False,
         "network_driver": None,
         "volume_driver": None,
-        "labels": {},
+        "labels": config.Config.labels,
         "public": False,
         "dns_nameserver": "8.8.8.8",
         "flavor_id": data_utils.rand_name('cluster'),
         "master_flavor_id": data_utils.rand_name('cluster'),
         "external_network_id": config.Config.nic_id,
+        "insecure_registry": config.Config.insecure_registry,
         "keypair_id": data_utils.rand_name('cluster'),
         "image_id": data_utils.rand_name('cluster')
     }
