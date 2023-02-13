@@ -166,6 +166,10 @@ class Config(object):
         cls.insecure_registry = CONF.magnum.insecure_registry
 
     @classmethod
+    def set_client_microversion(cls, config):
+        cls.client_microversion = CONF.magnum.client_microversion
+
+    @classmethod
     def setUp(cls):
         cls.set_admin_creds(config)
         cls.set_user_creds(config)
@@ -190,3 +194,4 @@ class Config(object):
         cls.set_cluster_creation_timeout(config)
         cls.set_labels(config)
         cls.set_insecure_registry(config)
+        cls.set_client_microversion(config)

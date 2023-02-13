@@ -21,6 +21,9 @@ from magnum_tempest_plugin.common import config
 class MagnumClient(rest_client.RestClient, metaclass=abc.ABCMeta):
     """Abstract class responsible for setting up auth provider"""
 
+    api_microversion_header_name = 'OpenStack-API-Version'
+    version_header_value = 'container-infra %s'
+
     def __init__(self, auth_provider):
         super(MagnumClient, self).__init__(
             auth_provider=auth_provider,
@@ -28,6 +31,13 @@ class MagnumClient(rest_client.RestClient, metaclass=abc.ABCMeta):
             region=config.Config.region,
             disable_ssl_certificate_validation=True
         )
+
+    def get_headers(self):
+        headers = super().get_headers()
+        if config.Config.client_microversion:
+            headers[self.api_microversion_header_name] = \
+                self.version_header_value % config.Config.client_microversion
+        return headers
 
     @classmethod
     def deserialize(cls, resp, body, model_type):
